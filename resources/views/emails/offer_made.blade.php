@@ -9,7 +9,7 @@
         /* Define your custom styles for the email layout */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #f9f9f9dc;
             margin: 0;
             padding: 0;
         }
