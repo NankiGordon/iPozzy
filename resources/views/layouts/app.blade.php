@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+
 </head>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -317,12 +318,10 @@
                     @endauth
                     @guest
                         <li class="nav-item">
-
                             <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="#"
                                 data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Login To Create Listing
                             </a>
-
                         </li>
                     @endguest
                 </ul>
@@ -395,6 +394,14 @@
                                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                             </div>
 
+                                            <!-- Google -->
+                                            <div class="mb-3">
+                                                <a href="{{ url('login/google') }}"
+                                                    class="btn btn-danger d-flex align-items-center justify-content-center">
+                                                    <i class="fab fa-google me-2"></i> <!-- Font Awesome Google Icon -->
+                                                    Login with Google
+                                                </a>
+                                            </div>
                                             <!-- Remember Me -->
                                             <div class="form-check mb-3">
                                                 <input id="remember_me" type="checkbox" class="form-check-input"
@@ -463,6 +470,8 @@
                                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                                 </div>
 
+
+
                                                 <!-- Password -->
                                                 <div class="mb-3">
                                                     <x-input-label for="password" :value="__('Password')" />
@@ -480,6 +489,15 @@
                                                         name="password_confirmation" required
                                                         autocomplete="new-password" />
                                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                                </div>
+                                                <!-- Google -->
+                                                <div class="mb-3">
+                                                    <a href="{{ url('login/google') }}"
+                                                        class="btn btn-danger d-flex align-items-center justify-content-center">
+                                                        <i class="fab fa-google me-2"></i>
+                                                        <!-- Font Awesome Google Icon -->
+                                                        Login with Google
+                                                    </a>
                                                 </div>
 
                                                 <div class="d-flex justify-content-between align-items-center">
