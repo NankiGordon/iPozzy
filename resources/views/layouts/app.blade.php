@@ -318,9 +318,9 @@
                     @endauth
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-warning text-dark px-3 py-2 border"
-                                href="{{ route('login') }}">
-                                Log in to Create Listing
+                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="#"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Login To Create Listing
                             </a>
                         </li>
                     @endguest
