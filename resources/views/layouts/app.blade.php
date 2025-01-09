@@ -352,16 +352,147 @@
                             </ul>
                         </li>
                     @else
+                        <!-- Navbar Item for Login -->
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}"
-                                href="{{ route('login') }}">Login</a>
+                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="#"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Login
+                            </a>
                         </li>
+
+                        <!-- Modal for Login Form -->
+                        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header d-flex justify-content-center w-100">
+                                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Login Form -->
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
+
+                                            <!-- Email Address -->
+                                            <div class="mb-3">
+                                                <x-input-label for="email" :value="__('Email')" />
+                                                <x-text-input id="email" class="form-control rounded-3 py-3"
+                                                    type="email" name="email" :value="old('email')" required autofocus
+                                                    autocomplete="username" />
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                            </div>
+
+                                            <!-- Password -->
+                                            <div class="mb-3">
+                                                <x-input-label for="password" :value="__('Password')" />
+                                                <x-text-input id="password" class="form-control rounded-3 py-3"
+                                                    type="password" name="password" required
+                                                    autocomplete="current-password" />
+                                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                            </div>
+
+                                            <!-- Remember Me -->
+                                            <div class="form-check mb-3">
+                                                <input id="remember_me" type="checkbox" class="form-check-input"
+                                                    name="remember">
+                                                <label for="remember_me"
+                                                    class="form-check-label text-sm">{{ __('Remember me') }}</label>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                @if (Route::has('password.request'))
+                                                    <a class="text-sm text-secondary"
+                                                        href="{{ route('password.request') }}">
+                                                        {{ __('Forgot your password?') }}
+                                                    </a>
+                                                @endif
+
+                                                <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">
+                                                    {{ __('Log in') }}
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
-                                    href="{{ route('register') }}">Register</a>
+                                <a class="nav-link {{ request()->is('register') ? 'active' : '' }}" href="#"
+                                    data-bs-toggle="modal" data-bs-target="#registerModal">
+                                    Register
+                                </a>
                             </li>
+                            <div class="modal fade" id="registerModal" tabindex="-1"
+                                aria-labelledby="registerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-center w-100">
+                                            <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Registration Form -->
+                                            <form method="POST" action="{{ route('register') }}">
+                                                @csrf
+
+                                                <!-- Name -->
+                                                <div class="mb-3">
+                                                    <x-input-label for="name" :value="__('Name')" />
+                                                    <x-text-input id="name" class="form-control rounded-3 py-3"
+                                                        type="text" name="name" :value="old('name')" required autofocus
+                                                        autocomplete="name" />
+                                                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                                </div>
+
+                                                <!-- Email Address -->
+                                                <div class="mb-3">
+                                                    <x-input-label for="email" :value="__('Email')" />
+                                                    <x-text-input id="email" class="form-control rounded-3 py-3"
+                                                        type="email" name="email" :value="old('email')" required
+                                                        autocomplete="username" />
+                                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                                </div>
+
+                                                <!-- Password -->
+                                                <div class="mb-3">
+                                                    <x-input-label for="password" :value="__('Password')" />
+                                                    <x-text-input id="password" class="form-control rounded-3 py-3"
+                                                        type="password" name="password" required
+                                                        autocomplete="new-password" />
+                                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                                </div>
+
+                                                <!-- Confirm Password -->
+                                                <div class="mb-3">
+                                                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                                                    <x-text-input id="password_confirmation"
+                                                        class="form-control rounded-3 py-3" type="password"
+                                                        name="password_confirmation" required
+                                                        autocomplete="new-password" />
+                                                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                                </div>
+
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <a class="text-sm text-secondary" href="{{ route('login') }}">
+                                                        {{ __('Already registered?') }}
+                                                    </a>
+
+                                                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">
+                                                        {{ __('Register') }}
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     @endauth
                 </ul>
