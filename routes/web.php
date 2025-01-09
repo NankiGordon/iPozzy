@@ -9,6 +9,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\WhatsAppController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\SocialController;
 use Carbon\Carbon;
 
 // Home route
@@ -104,9 +105,11 @@ Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->na
 Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 Route::post('/payment-notify', [PaymentController::class, 'paymentNotify'])->name('payment.notify');
 
-// Route::get('/pricing-modal', function () {
-//     return view('modals.pricing');
-// })->name('pricing.modal');
+
+
+Route::get('login/google', [SocialController::class, 'redirectToGoogle']);
+Route::get('callback/google', [SocialController::class, 'handleGoogleCallback']);
+
 
 
 // Authentication routes
