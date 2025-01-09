@@ -115,8 +115,10 @@
                                     <a href="{{ route('property.makeOffer', $property->id) }}"
                                         class="btn btn-outline-primary btn-sm">Make Offer</a>
                                 @else
-                                    <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">Login to Make
-                                        Offer</a>
+                                    <a class="btn btn-outline-info {{ request()->is('login') ? 'active' : '' }}"
+                                        href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        Login To Make Offer
+                                    </a>
                                 @endif
                             @endif
 
